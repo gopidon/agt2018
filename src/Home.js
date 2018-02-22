@@ -5,7 +5,7 @@ export default class Home extends React.Component{
     render(){
         return (
             <div>
-                Home!
+                Click on My Representations in the menu
             </div>
         )
     }

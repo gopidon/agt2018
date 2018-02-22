@@ -19,7 +19,7 @@ const FixedMenuLayout = () => (
                     defaultSelectedKeys={['News']}
                     style={{ lineHeight: '64px' }}>
                     <Menu.Item key="Home">
-                        <Link to="/reps" className="nav-text">Home</Link>
+                        <Link to="/reps" className="nav-text">My Representations</Link>
                     </Menu.Item>
                     {/*<Menu.Item key="Test">
                      <Link to="/Test" className="nav-text">Test</Link>
