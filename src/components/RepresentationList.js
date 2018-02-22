@@ -98,10 +98,10 @@ class RepresentationList extends React.Component {
         lines =doc.splitTextToSize(currentPosting, (pdfInMM-lMargin-rMargin));
         doc.text(xStart,yStart+60,lines);
         doc.text(`Option1: ${option1}`, xStart, yStart+90);
-        doc.text(`Option2: ${option2}`, xStart, yStart+100);
-        doc.text(`Option3: ${option3}`, xStart, yStart+110);
-        doc.text(`Option4: ${option4}`, xStart, yStart+120);
-        doc.text(`Option5: ${option5}`, xStart, yStart+130);
+        doc.text(`Option2: ${option2 || 'Not given'}`, xStart, yStart+100);
+        doc.text(`Option3: ${option3 || 'Not given'}`, xStart, yStart+110);
+        doc.text(`Option4: ${option4 || 'Not given'}`, xStart, yStart+120);
+        doc.text(`Option5: ${option5 || 'Not given'}`, xStart, yStart+130);
         doc.text(`Grounds for Representation:`, xStart, yStart+140);
         doc.text(`${grounds}`, xStart, yStart+150);
         doc.text(`Brief details on grounds:`, xStart, yStart+160);
