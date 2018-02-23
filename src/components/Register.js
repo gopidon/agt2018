@@ -104,8 +104,7 @@ class RegistrationForm extends React.Component {
     render() {
         //const {medicalCertificateList, disabilityCertificateList, spouseEmploymentCertificateList, childAcademicCertificateList, otherCertificateList} = this.state;
         const { uploadingMedicalCertificate, uploadingDisabilityCertificate, uploadingSpouseEmploymentCertificate, uploadingChildAcademicCertificate, uploadingOtherCertificate } = this.state;
-
-
+        const dateFormat = 'DD-MM-YYYY';
         const medicalCertificateProps = {
             action: 'https://api.graph.cool/file/v1/cjdvts85z2ff701755ezv6ewd',
             onRemove: (file) => {
@@ -350,7 +349,7 @@ class RegistrationForm extends React.Component {
                     {getFieldDecorator('dob', {
                         rules: [{ type: 'object', required: true, message: 'Please select your Date Of Birth' }]
                     })(
-                        <DatePicker />
+                        <DatePicker format={dateFormat}/>
                     )}
                 </FormItem>
                 <FormItem
