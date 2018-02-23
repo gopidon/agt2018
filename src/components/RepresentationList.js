@@ -105,8 +105,10 @@ class RepresentationList extends React.Component {
         doc.text(`Grounds for Representation:`, xStart, yStart+140);
         doc.text(`${grounds}`, xStart, yStart+150);
         doc.text(`Brief details on grounds:`, xStart, yStart+160);
-        lines =doc.splitTextToSize(details, (pdfInMM-lMargin-rMargin));
-        doc.text(xStart,yStart+170,lines);
+        if(details){
+            lines =doc.splitTextToSize(details, (pdfInMM-lMargin-rMargin));
+            doc.text(xStart,yStart+170,lines);
+        }
         doc.text('Employee Signature', xStart+130, yStart+240)
         //doc.save('Generated.pdf');
         doc.save(`${employeeId}_AGT2018.pdf`)
