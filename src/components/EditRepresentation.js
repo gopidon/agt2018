@@ -111,9 +111,19 @@ class EditRepresentation extends React.Component {
             },
             beforeUpload: (file) => {
                 console.log("File:", file)
-                this.setState(({medicalCertificateList}) => ({
-                    medicalCertificateList: [file]
-                }));
+                const isPDF = file.type === 'application/pdf';
+                if (!isPDF) {
+                    message.error('You can only upload a PDF file!');
+                }
+                const isLt5M = file.size / 1024 / 1024 < 5;
+                if (!isLt5M) {
+                    message.error('File size must be smaller than 5MB!');
+                }
+                if(isPDF && isLt5M){
+                    this.setState(({medicalCertificateList}) => ({
+                        medicalCertificateList: [file]
+                    }));
+                }
                 return false;
             },
             fileList: this.state.medicalCertificateList,
@@ -130,9 +140,19 @@ class EditRepresentation extends React.Component {
             },
             beforeUpload: (file) => {
                 console.log("File:", file)
-                this.setState(({disabilityCertificateList}) => ({
-                    disabilityCertificateList: [file]
-                }));
+                const isPDF = file.type === 'application/pdf';
+                if (!isPDF) {
+                    message.error('You can only upload a PDF file!');
+                }
+                const isLt5M = file.size / 1024 / 1024 < 5;
+                if (!isLt5M) {
+                    message.error('File size must be smaller than 5MB!');
+                }
+                if(isPDF && isLt5M){
+                    this.setState(({disabilityCertificateList}) => ({
+                        disabilityCertificateList: [file]
+                    }));
+                }
                 return false;
             },
             fileList: this.state.disabilityCertificateList,
@@ -149,9 +169,19 @@ class EditRepresentation extends React.Component {
             },
             beforeUpload: (file) => {
                 console.log("File:", file)
-                this.setState(({spouseEmploymentCertificateList}) => ({
-                    spouseEmploymentCertificateList: [file]
-                }));
+                const isPDF = file.type === 'application/pdf';
+                if (!isPDF) {
+                    message.error('You can only upload a PDF file!');
+                }
+                const isLt5M = file.size / 1024 / 1024 < 5;
+                if (!isLt5M) {
+                    message.error('File size must be smaller than 5MB!');
+                }
+                if(isPDF && isLt5M){
+                    this.setState(({spouseEmploymentCertificateList}) => ({
+                        spouseEmploymentCertificateList: [file]
+                    }));
+                }
                 return false;
             },
             fileList: this.state.spouseEmploymentCertificateList,
@@ -168,9 +198,19 @@ class EditRepresentation extends React.Component {
             },
             beforeUpload: (file) => {
                 console.log("File:", file)
-                this.setState(({childAcademicCertificateList}) => ({
-                    childAcademicCertificateList: [file]
-                }));
+                const isPDF = file.type === 'application/pdf';
+                if (!isPDF) {
+                    message.error('You can only upload a PDF file!');
+                }
+                const isLt5M = file.size / 1024 / 1024 < 5;
+                if (!isLt5M) {
+                    message.error('File size must be smaller than 5MB!');
+                }
+                if(isPDF && isLt5M){
+                    this.setState(({childAcademicCertificateList}) => ({
+                        childAcademicCertificateList: [file]
+                    }));
+                }
                 return false;
             },
             fileList: this.state.childAcademicCertificateList,
