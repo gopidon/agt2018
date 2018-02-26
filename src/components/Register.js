@@ -455,6 +455,7 @@ class RegistrationForm extends React.Component {
                             <Option value="Spouse Grounds">Spouse Grounds</Option>
                             <Option value="Child in 10th or 12th in Current Academic Year">Child in 10th or 12th in Current Academic Year</Option>
                             <Option value="Less than 3 years of Retirement from 2018-19">Less than 3 years of Retirement from 2018-19</Option>
+                            <Option value="Other">Other</Option>
                         </Select>
                     )}
                 </FormItem>
