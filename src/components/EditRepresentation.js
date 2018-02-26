@@ -5,7 +5,7 @@ import gql from 'graphql-tag';
 import {graphql, compose} from 'react-apollo'
 import moment from 'moment';
 import { Link, withRouter} from 'react-router-dom';
-import { Form, Input, InputNumber, DatePicker,  Icon, Select,  Button, Upload, message } from 'antd';
+import { Form, Input, InputNumber, DatePicker,  Icon, Select,  Button, Upload, message, Modal } from 'antd';
 const {TextArea} = Input
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -78,7 +78,7 @@ class EditRepresentation extends React.Component {
                     variables['otherId'] = otherCertificateFile.id
                 }
                 console.log("Variables:", variables);
-                this.props.mutate({variables})
+                this.props.updateRepresentation({variables})
                     .then((res) => {
                         console.log("Created Representation", res.data);
                         message.success("Your representation has been updated. Your representation shall be frozen on the last date at 11.59 PM. However, you can modify your options/ grounds of representation before last date", 10)
@@ -89,6 +89,30 @@ class EditRepresentation extends React.Component {
                         message.error(`Something went wrong while saving your representation: ${err}`, 5)
                     })
             }
+        });
+    }
+
+    handleDelete(e){
+        e.preventDefault();
+        var self = this;
+        let repId = this.props.representation.id;
+        console.log("Deleting Rep:", repId);
+        Modal.confirm({
+            title: 'Are you sure you want to delete your representation?',
+            onOk() {
+                self.props.deleteRepresentation({variables: {id: repId}})
+                    .then((res) => {
+                        console.log("Deleted Rep:", res.data);
+                        message.success("Your representation has been deleted", 10)
+                        self.props.history.push("/reps")
+                        //The file is auto-removed from the Notification object too.
+                    })
+                    .catch((err) => {
+                        console.log("Error deleting Rep:", err);
+                        message.error(`Something went wrong while deleting your representation: ${err}`, 5)
+                    })
+            },
+            onCancel() {},
         });
     }
 
@@ -595,10 +619,13 @@ class EditRepresentation extends React.Component {
                     }
                 </FormItem>
                 <FormItem {...tailFormItemLayout}>
-                    <Button type="danger" style={{marginRight: 10}} >
+                    <Button type="default" style={{marginRight: 10}} >
                         <Link to={`/reps`}>
                             Cancel
                         </Link>
+                    </Button>
+                    <Button type="danger" style={{marginRight: 10}} onClick={this.handleDelete.bind(this)}>
+                        Delete
                     </Button>
                     <Button type="primary" htmlType="submit">Save</Button>
                 </FormItem>
@@ -682,6 +709,17 @@ const updateRepresentationMutation = gql`
   }
 `
 
+const deleteRepresentationMutation = gql`
+  mutation deleteRepresentation($id: ID!){
+    deleteRepresentation(id: $id) {
+      id
+    }
+  }
+`
+
 const WrappedRegistrationForm = Form.create()(EditRepresentation);
 
-export default graphql(updateRepresentationMutation)(withRouter(WrappedRegistrationForm))
+export default compose(
+    graphql(updateRepresentationMutation, {name: 'updateRepresentation'}),
+    graphql(deleteRepresentationMutation, {name: 'deleteRepresentation'})
+)(withRouter(WrappedRegistrationForm))
